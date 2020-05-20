@@ -15,23 +15,68 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url(../img/bg.jpg);
+  /*background-image: url(../img/bj2.jpg);*/
+  /*filter: blur(0px);*/
+  background-color: #000;
   background-position: 100% 100%;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   display: flex;
   justify-content: space-evenly;
+  padding: 0.5%
+}
+
+section {
+  /*background-color: #202B47;*/
+  /*background-color: rgba(32, 43, 71,0.6);*/
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-transition:border linear .2s,-webkit-box-shadow linear .5s;
+  border-color:rgba(141,39,142,.75);
+  -webkit-box-shadow:0 0 7px rgba(87, 147, 243,1);
+  transition: all 0.3s;
+  /*!* 设置3d环境 *!*/
+  /*transform-style:preserve-3d;*/
+  /*!*animation: play 10s linear infinite;*!*/
+  /*transform: rotateY(-60deg);*/
+  perspective: 800px;
+}
+
+section:hover {
+  background-color: rgba(32, 43, 71,0.5);
+}
+
+.section_margin{
+  margin-bottom: 2%;
 }
 
 .section_side {
-  width: 28%;
+  width: 24%;
   height: 100%;
-  background-color: #000;
+  padding-bottom: 0.5%;
 }
 
 .section_middle {
-  width: 44%;
+  width: 40%;
   height: 100%;
-  background-color: #FFF;
-  margin: 0 4%;
+  margin: 0 0.5%;
+  padding-bottom: 0.5%;
+}
+
+.section_middle_count{
+  font-size: 24px !important;
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section_middle_count div:last-of-type {
+  color: #b0becc;
+  font-size: 14px;
+  margin-top: 5px;
 }

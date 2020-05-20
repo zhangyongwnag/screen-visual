@@ -5,6 +5,7 @@
   "dependencies": {
     "echarts": "^4.7.0",
     "react": "^16.13.1",
+    "react-countup": "^4.3.3",
     "react-dom": "^16.13.1",
     "react-scripts": "0.9.x"
   },

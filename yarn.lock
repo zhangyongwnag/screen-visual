@@ -1521,6 +1521,10 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
     parse-json "^2.2.0"
     require-from-string "^1.1.0"
 
+countup.js@^1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-1.9.3.tgz#ce3e50cd7160441e478f07da31895edcc0f1c9dd"
+
 cross-spawn@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-4.0.2.tgz#7b9247621c23adfdd3856004a823cbe397424d41"
@@ -1832,6 +1836,12 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
+
+echarts@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.7.0.tgz#5b3875a4c2f91e3929425fabab9eace7e4098b3f"
+  dependencies:
+    zrender "4.3.0"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -4626,7 +4636,7 @@ promise@7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.6.2:
+prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   dependencies:
@@ -4734,6 +4744,14 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-countup@^4.3.3:
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-4.3.3.tgz#143a8d854d47290b73d6915eac20a12d839153c2"
+  dependencies:
+    countup.js "^1.9.3"
+    prop-types "^15.7.2"
+    warning "^4.0.3"
+
 react-dev-utils@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-0.5.2.tgz#50d0b962d3a94b6c2e8f2011ed6468e4124bc410"
@@ -4749,7 +4767,7 @@ react-dev-utils@^0.5.2:
     sockjs-client "1.0.1"
     strip-ansi "3.0.1"
 
-react-dom@16.13.1:
+react-dom@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
   dependencies:
@@ -4807,7 +4825,7 @@ react-scripts@0.9.x:
   optionalDependencies:
     fsevents "1.0.17"
 
-react@16.13.1:
+react@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   dependencies:
@@ -5974,6 +5992,12 @@ walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
+warning@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
+  dependencies:
+    loose-envify "^1.0.0"
+
 watch@~0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/watch/-/watch-0.10.0.tgz#77798b2da0f9910d595f1ace5b0c2258521f21dc"
@@ -6212,3 +6236,7 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+zrender@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.3.0.tgz#9f056121b20bbae44414d287bf6a119ff7042661"
