@@ -23,7 +23,8 @@
   background-size: 100% 100%;
   display: flex;
   justify-content: space-evenly;
-  padding: 0.5%
+  padding: 0.5%;
+  transition: all 0.5s;
 }
 
 section {
@@ -36,12 +37,12 @@ section {
   -webkit-transition:border linear .2s,-webkit-box-shadow linear .5s;
   border-color:rgba(141,39,142,.75);
   -webkit-box-shadow:0 0 7px rgba(87, 147, 243,1);
-  transition: all 0.3s;
   /*!* 设置3d环境 *!*/
   /*transform-style:preserve-3d;*/
   /*!*animation: play 10s linear infinite;*!*/
   /*transform: rotateY(-60deg);*/
   perspective: 800px;
+  transition: all 0.3s linear;
 }
 
 section:hover {
@@ -56,6 +57,15 @@ section:hover {
   width: 24%;
   height: 100%;
   padding-bottom: 0.5%;
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.section_side_left{
+  transform: translateX(-2000px);
+}
+.section_side_right{
+  transform: translateX(2000px);
 }
 
 .section_middle {
@@ -63,6 +73,9 @@ section:hover {
   height: 100%;
   margin: 0 0.5%;
   padding-bottom: 0.5%;
+  transition: all 0.5s;
+  opacity: 0;
+  transform: translateY(-2000px);
 }
 
 .section_middle_count{
@@ -79,4 +92,95 @@ section:hover {
   color: #b0becc;
   font-size: 14px;
   margin-top: 5px;
+}
+
+.common_flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*enter：入场前*/
+.fade-enter {
+  opacity: 0;
+}
+
+/*enter-active：入场后到入场结束*/
+.fade-enter-active {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+/*enter-done：入场动画执行完毕后，保持状态*/
+.fade-enter-done {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+/*enter：出场前*/
+.fade-exit {
+  opacity: 1;
+}
+
+/*enter-active：出场后到出场结束*/
+.fade-exit-active {
+  transform: translateX(200px);
+  opacity: 0;
+}
+
+/*enter-done：出场动画执行完毕后，保持状态*/
+.fade-exit-done {
+  opacity: 0;
+}
+
+
+/*enter：入场前*/
+.fadeTop-enter {
+  opacity: 0;
+}
+
+/*enter-active：入场后到入场结束*/
+.fadeTop-enter-active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+/*enter-done：入场动画执行完毕后，保持状态*/
+.fadeTop-enter-done {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+/*enter：入场前*/
+.fadeBottom-enter {
+  opacity: 0;
+}
+
+/*enter-active：入场后到入场结束*/
+.fadeBottom-enter-active {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+/*enter-done：入场动画执行完毕后，保持状态*/
+.fadeBottom-enter-done {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+/*enter：入场前*/
+.fadeLeft-enter {
+  opacity: 0;
+}
+
+/*enter-active：入场后到入场结束*/
+.fadeLeft-enter-active {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+/*enter-done：入场动画执行完毕后，保持状态*/
+.fadeLeft-enter-done {
+  transform: translateX(0px);
+  opacity: 1;
 }
