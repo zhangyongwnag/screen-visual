@@ -9,14 +9,16 @@
   cursor: pointer;
   box-sizing: border-box;
   font-size: 18px;
+  /*background-color: #000;*/
 }
 
 .wrap {
   width: 100vw;
+  min-width: 360px;
   height: 100vh;
   overflow: hidden;
-  /*background-image: url(../img/bj2.jpg);*/
-  /*filter: blur(0px);*/
+  /*background-image: url(../img/bj.jpg);*/
+  /*filter: blur(5px);*/
   background-color: #000;
   background-position: 100% 100%;
   background-repeat: no-repeat;
@@ -25,6 +27,7 @@
   justify-content: space-evenly;
   padding: 0.5%;
   transition: all 0.5s;
+  /*transform: translateX(200px);*/
 }
 
 section {
@@ -42,7 +45,7 @@ section {
   /*!*animation: play 10s linear infinite;*!*/
   /*transform: rotateY(-60deg);*/
   perspective: 800px;
-  transition: all 0.3s linear;
+  transition: all 0.6s linear;
 }
 
 section:hover {
@@ -58,14 +61,6 @@ section:hover {
   height: 100%;
   padding-bottom: 0.5%;
   transition: all 0.5s;
-  opacity: 0;
-}
-
-.section_side_left{
-  transform: translateX(-2000px);
-}
-.section_side_right{
-  transform: translateX(2000px);
 }
 
 .section_middle {
@@ -74,8 +69,6 @@ section:hover {
   margin: 0 0.5%;
   padding-bottom: 0.5%;
   transition: all 0.5s;
-  opacity: 0;
-  transform: translateY(-2000px);
 }
 
 .section_middle_count{
@@ -86,6 +79,7 @@ section:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
 }
 
 .section_middle_count div:last-of-type {
@@ -100,87 +94,55 @@ section:hover {
   align-items: center;
 }
 
-/*enter：入场前*/
-.fade-enter {
+.exampleLeft-appear {
   opacity: 0;
+  transform: translateX(-1000px);
 }
 
-/*enter-active：入场后到入场结束*/
-.fade-enter-active {
+.exampleLeft-appear.exampleLeft-appear-active {
   transform: translateX(0px);
   opacity: 1;
 }
 
-/*enter-done：入场动画执行完毕后，保持状态*/
-.fade-enter-done {
+
+.exampleRight-appear {
+  opacity: 0;
+  transform: translateX(1000px);
+}
+
+.exampleRight-appear.exampleRight-appear-active {
   transform: translateX(0px);
   opacity: 1;
 }
 
-/*enter：出场前*/
-.fade-exit {
-  opacity: 1;
-}
-
-/*enter-active：出场后到出场结束*/
-.fade-exit-active {
-  transform: translateX(200px);
+.exampleTop-appear {
   opacity: 0;
+  transform: translateY(-1000px);
 }
 
-/*enter-done：出场动画执行完毕后，保持状态*/
-.fade-exit-done {
-  opacity: 0;
-}
-
-
-/*enter：入场前*/
-.fadeTop-enter {
-  opacity: 0;
-}
-
-/*enter-active：入场后到入场结束*/
-.fadeTop-enter-active {
+.exampleTop-appear.exampleTop-appear-active {
   transform: translateY(0px);
   opacity: 1;
 }
 
-/*enter-done：入场动画执行完毕后，保持状态*/
-.fadeTop-enter-done {
+.exampleBottom-appear {
+  opacity: 0;
+  transform: translateY(1000px);
+}
+
+.exampleBottom-appear.exampleBottom-appear-active {
   transform: translateY(0px);
   opacity: 1;
 }
 
-/*enter：入场前*/
-.fadeBottom-enter {
-  opacity: 0;
+@media screen and (max-width: 1199px) {
+
 }
 
-/*enter-active：入场后到入场结束*/
-.fadeBottom-enter-active {
-  transform: translateX(0px);
-  opacity: 1;
+@media screen and (max-width: 967px) {
+
 }
 
-/*enter-done：入场动画执行完毕后，保持状态*/
-.fadeBottom-enter-done {
-  transform: translateX(0px);
-  opacity: 1;
-}
+@media screen and (max-width: 479px) {
 
-/*enter：入场前*/
-.fadeLeft-enter {
-  opacity: 0;
-}
-
-/*enter-active：入场后到入场结束*/
-.fadeLeft-enter-active {
-  transform: translateX(0px);
-  opacity: 1;
-}
-
-/*enter-done：入场动画执行完毕后，保持状态*/
-.fadeLeft-enter-done {
-  transform: translateX(0px);
-  opacity: 1;
 }

@@ -5,14 +5,14 @@ import Header from './components/Header'
 import Table from "./components/Table";
 import CountUp from 'react-countup'
 import Loading from './components/Loading'
-import {CSSTransition} from 'react-transition-group'
+import 'wowjs/css/libs/animate.css'
+import {WOW} from 'wowjs'
 
 export default class App extends Component {
   constructor() {
     super()
     this.state = {
       loading: true,
-      upload:true,
       echartsList: [], // echarts绘制的结果
       tableList: [
         {
@@ -50,142 +50,144 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    // 监听窗口变化
+    window.addEventListener('resize', this.resizeEcharts)
+    let wow = new WOW({
+      live:false,
+      boxClass: 'wow',
+      animateClass: 'animated',
+      offset: 0,
+      mobile: true
+    })
+    wow.init();
     setTimeout(() => {
       this.setState({
         loading: false
       }, () => {
-        setTimeout(() => {
-          this.setState({
-            upload:false
-          },() => {
-            function randomValue() {
-              return Math.round(Math.random() * 1000);
+        function randomValue() {
+          return Math.round(Math.random() * 1000);
+        }
+
+        // 渲染省市区县覆盖率
+        this.renderCircleInfo(
+          [
+            {
+              name: '省覆盖率',
+              value: 100,
+              per: '25%',
+            },
+            {
+              name: '市覆盖率',
+              value: 100,
+              per: '25%',
+            },
+            {
+              name: '区覆盖率',
+              value: 100,
+              per: '25%',
+            },
+            {
+              name: '县覆盖率',
+              value: 100,
+              per: '25%',
             }
+          ]
+        )
+        // 渲染市区使用人数排行
+        this.renderCityUserInfo()
+        // 渲染使用人数数量
+        this.renderUserInfo(
+          [
+            {
+              name: '我',
+              value: 100
+            },
+            {
+              name: '我1',
+              value: 90
+            },
+            {
+              name: '我2',
+              value: 110
+            },
+            {
+              name: '我3',
+              value: 120
+            },
+            {
+              name: '我',
+              value: 60
+            },
+            {
+              name: '我1',
+              value: 79
+            },
+            {
+              name: '我2',
+              value: 90
+            },
+            {
+              name: '我3',
+              value: 100
+            },
+            {
+              name: '我3',
+              value: 110
+            },
+            {
+              name: '我3',
+              value: 122
+            },
+          ]
+        )
+        // 渲染地图覆盖率
+        this.renderMapInfo(
+          [
+            {name: "南海诸岛", value: 0},
+            {name: '北京', value: randomValue()},
+            {name: '天津', value: randomValue()},
+            {name: '上海', value: randomValue()},
+            {name: '重庆', value: randomValue()},
+            {name: '河北', value: randomValue()},
+            {name: '河南', value: randomValue()},
+            {name: '云南', value: randomValue()},
+            {name: '辽宁', value: randomValue()},
+            {name: '黑龙江', value: randomValue()},
+            {name: '湖南', value: randomValue()},
+            {name: '安徽', value: randomValue()},
+            {name: '山东', value: randomValue()},
+            {name: '新疆', value: randomValue()},
+            {name: '江苏', value: randomValue()},
+            {name: '浙江', value: randomValue()},
+            {name: '江西', value: randomValue()},
+            {name: '湖北', value: randomValue()},
+            {name: '广西', value: randomValue()},
+            {name: '甘肃', value: randomValue()},
+            {name: '山西', value: randomValue()},
+            {name: '内蒙古', value: randomValue()},
+            {name: '陕西', value: randomValue()},
+            {name: '吉林', value: randomValue()},
+            {name: '福建', value: randomValue()},
+            {name: '贵州', value: randomValue()},
+            {name: '广东', value: randomValue()},
+            {name: '青海', value: randomValue()},
+            {name: '西藏', value: randomValue()},
+            {name: '四川', value: randomValue()},
+            {name: '宁夏', value: randomValue()},
+            {name: '海南', value: randomValue()},
+            {name: '台湾', value: randomValue()},
+            {name: '香港', value: randomValue()},
+            {name: '澳门', value: randomValue()}
+          ]
+        )
+        // 渲染5G覆盖率
+        this.renderCoverRate()
 
-            // 监听窗口变化
-            window.addEventListener('resize', this.resizeEcharts)
-            // 渲染省市区县覆盖率
-            this.renderCircleInfo(
-              [
-                {
-                  name: '省覆盖率',
-                  value: 100,
-                  per: '25%',
-                },
-                {
-                  name: '市覆盖率',
-                  value: 100,
-                  per: '25%',
-                },
-                {
-                  name: '区覆盖率',
-                  value: 100,
-                  per: '25%',
-                },
-                {
-                  name: '县覆盖率',
-                  value: 100,
-                  per: '25%',
-                }
-              ]
-            )
-            // 渲染市区使用人数排行
-            this.renderCityUserInfo()
-            // 渲染使用人数数量
-            this.renderUserInfo(
-              [
-                {
-                  name: '我',
-                  value: 100
-                },
-                {
-                  name: '我1',
-                  value: 90
-                },
-                {
-                  name: '我2',
-                  value: 110
-                },
-                {
-                  name: '我3',
-                  value: 120
-                },
-                {
-                  name: '我',
-                  value: 60
-                },
-                {
-                  name: '我1',
-                  value: 79
-                },
-                {
-                  name: '我2',
-                  value: 90
-                },
-                {
-                  name: '我3',
-                  value: 100
-                },
-                {
-                  name: '我3',
-                  value: 110
-                },
-                {
-                  name: '我3',
-                  value: 122
-                },
-              ]
-            )
-            // 渲染地图覆盖率
-            this.renderMapInfo(
-              [
-                {name: "南海诸岛", value: 0},
-                {name: '北京', value: randomValue()},
-                {name: '天津', value: randomValue()},
-                {name: '上海', value: randomValue()},
-                {name: '重庆', value: randomValue()},
-                {name: '河北', value: randomValue()},
-                {name: '河南', value: randomValue()},
-                {name: '云南', value: randomValue()},
-                {name: '辽宁', value: randomValue()},
-                {name: '黑龙江', value: randomValue()},
-                {name: '湖南', value: randomValue()},
-                {name: '安徽', value: randomValue()},
-                {name: '山东', value: randomValue()},
-                {name: '新疆', value: randomValue()},
-                {name: '江苏', value: randomValue()},
-                {name: '浙江', value: randomValue()},
-                {name: '江西', value: randomValue()},
-                {name: '湖北', value: randomValue()},
-                {name: '广西', value: randomValue()},
-                {name: '甘肃', value: randomValue()},
-                {name: '山西', value: randomValue()},
-                {name: '内蒙古', value: randomValue()},
-                {name: '陕西', value: randomValue()},
-                {name: '吉林', value: randomValue()},
-                {name: '福建', value: randomValue()},
-                {name: '贵州', value: randomValue()},
-                {name: '广东', value: randomValue()},
-                {name: '青海', value: randomValue()},
-                {name: '西藏', value: randomValue()},
-                {name: '四川', value: randomValue()},
-                {name: '宁夏', value: randomValue()},
-                {name: '海南', value: randomValue()},
-                {name: '台湾', value: randomValue()},
-                {name: '香港', value: randomValue()},
-                {name: '澳门', value: randomValue()}
-              ]
-            )
-            // 渲染5G覆盖率
-            this.renderCoverRate()
+        this.render1()
 
-            this.render1()
+        this.render2()
 
-            this.render2()
-
-            this.render3()
-          })
-        },10)
+        this.render3()
       })
     }, 1000)
   }
@@ -948,97 +950,87 @@ export default class App extends Component {
 
   // 重拍重绘echarts图表
   resizeEcharts = () => {
-    this.state.echartsList.map(item => item.resize())
+    this.state.echartsList.map(item => {
+      // item.resize()
+      setTimeout(() => {
+        item.resize()
+      }, 200)
+    })
   }
 
   render() {
-    let {loading,upload} = this.state
-    console.log(loading)
-        if (loading) {
-          return (
-            <Loading/>
-          )
-        } else {
-          return (
-              <div className='wrap'>
-                <CSSTransition
-                  in={!upload} // 如果this.state.show从false变为true，则动画入场，反之出场动画
-                  timeout={500} //动画执行1秒
-                  classNames='fadeLeft' //自定义的class名
-                >
-                  <div className='section_side section_side_left'>
-                    <section style={{width: '100%', height: '50%', marginBottom: '2%'}}>
-                      <Header title='5G省市区县覆盖率'/>
-                      <div id='circle_info' style={{width: '80%', height: '93%', margin: '-20px 0 0 10%'}}></div>
-                    </section>
-                    <section style={{width: '100%', height: '50%'}}>
-                      <div id='city_user_info' style={{width: '100%', height: '100%'}}></div>
-                    </section>
-                  </div>
-                </CSSTransition>
-                <CSSTransition
-                  in={!upload} // 如果this.state.show从false变为true，则动画入场，反之出场动画
-                  timeout={500} //动画执行1秒
-                  classNames='fadeBottom' //自定义的class名
-                >
-                  <div className='section_middle'>
-                    <section style={{height: '10%', marginBottom: '1.3%', display: 'flex'}}>
-                      <div className='section_middle_count'>
-                        <CountUp style={{color: '#eb6161', fontSize: '24px'}} start={0} end={123123123} suffix=' 个'/>
-                        <div>总人数</div>
-                      </div>
-                      <div className='section_middle_count'>
-                        <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={89} suffix=' %'></CountUp>
-                        <div>覆盖率</div>
-                      </div>
-                      <div className='section_middle_count'>
-                        <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={209} suffix=' 个'></CountUp>
-                        <div>市数量</div>
-                      </div>
-                      <div className='section_middle_count'>
-                        <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={90} suffix=' dB'></CountUp>
-                        <div>信号强度</div>
-                      </div>
-                    </section>
-                    <section style={{width: '100%', marginBottom: '1.3%', height: '50%'}}>
-                      <div id='map_info' style={{width: '100%', height: '100%'}}></div>
-                    </section>
-                    <section style={{width: '100%', marginBottom: '1.3%', height: '38.9%', padding: 0}}>
-                      <Table tableList={this.state.tableList}/>
-                    </section>
-                  </div>
-                </CSSTransition>
-                <CSSTransition
-                  in={!upload} // 如果this.state.show从false变为true，则动画入场，反之出场动画
-                  timeout={500} //动画执行1秒
-                  classNames='fade' //自定义的class名
-                >
-                <div className='section_side section_side_right' style={{width: '36%'}}>
-                  <div style={{width: '100%', height: '61%', marginBottom: '1.3%', display: 'flex'}}>
-                    <section style={{width: '56%', height: '100%'}}>
-                      <Header title='5G地区人数排行TOP10'/>
-                      <div id='user_info' style={{width: '100%', height: '100%'}}></div>
-                    </section>
-                    <div style={{width: '44%', height: '100%', marginLeft: '1.3%'}}>
-                      <section style={{width: '100%%', height: '32.1%', marginBottom: '3.6%'}}>
-                        <div id='data1' style={{width: '100%', height: '100%'}}></div>
-                      </section>
-                      <section style={{width: '100%', height: '32.1%', marginBottom: '3.6%'}}>
-                        <div id='data2' style={{width: '100%', height: '100%'}}></div>
-                      </section>
-                      <section style={{width: '100%', height: '32.1%'}}>
-                        <div id='data3' style={{width: '100%', height: '100%'}}></div>
-                      </section>
-                    </div>
-                  </div>
-                  <section style={{width: '100%', marginBottom: '1.3%', height: '39%'}}>
-                    <Header title='5G地区覆盖率'/>
-                    <div id='area_conver_rate' style={{width: '100%', height: '100%', marginTop: '-35px'}}></div>
-                  </section>
-                </div>
-                </CSSTransition>
+    let {loading} = this.state
+    if (loading) {
+      return (
+        <Loading/>
+      )
+    } else {
+      return (
+        <div className='wrap'>
+          <div className='section_side'>
+            <section style={{width: '100%', height: '50%', marginBottom: '2%'}} className="wow fadeInLeftBig animated">
+              <Header title='5G省市区县覆盖率'/>
+              <div id='circle_info' style={{width: '80%', height: '93%', margin: '-20px 0 0 10%'}}></div>
+            </section>
+            <section style={{width: '100%', height: '50%'}} className="wow bounceInLeft animated">
+              <div id='city_user_info' style={{width: '100%', height: '100%'}}></div>
+            </section>
+          </div>
+          <div className='section_middle'>
+            <section style={{height: '10%', marginBottom: '1.3%', display: 'flex'}} className="wow flash animated">
+              <div className='section_middle_count'>
+                <CountUp style={{color: '#eb6161', fontSize: '24px'}} start={0} end={123123123} suffix=' 个'
+                         duration={4} separator=','/>
+                <div>总人数</div>
               </div>
-          );
-        }
+              <div className='section_middle_count'>
+                <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={89} suffix=' %' duration={4}
+                         separator=','/>
+                <div>覆盖率</div>
+              </div>
+              <div className='section_middle_count'>
+                <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={209} suffix=' 个' duration={4}
+                         separator=','/>
+                <div>市数量</div>
+              </div>
+              <div className='section_middle_count'>
+                <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={90} suffix=' dB' duration={4}
+                         separator=','/>
+                <div>信号强度</div>
+              </div>
+            </section>
+            <section style={{width: '100%', marginBottom: '1.3%', height: '50%'}} className="wow bounceIn animated">
+              <div id='map_info' style={{width: '100%', height: '100%'}}></div>
+            </section>
+            <section style={{width: '100%', marginBottom: '1.3%', height: '38.9%', padding: 0}} className="wow fadeInUpBig animated">
+              <Table tableList={this.state.tableList}/>
+            </section>
+          </div>
+          <div className='section_side' style={{width: '36%'}}>
+            <div style={{width: '100%', height: '61%', marginBottom: '1.3%', display: 'flex'}}>
+              <section style={{width: '56%', height: '100%'}} className="wow bounceInDown animated">
+                <Header title='5G地区人数排行TOP10'/>
+                <div id='user_info' style={{width: '100%', height: '100%'}}></div>
+              </section>
+              <div style={{width: '44%', height: '100%', marginLeft: '1.3%'}}>
+                <section style={{width: '100%%', height: '32.1%', marginBottom: '3.6%'}} className="wow flipInX animated">
+                  <div id='data1' style={{width: '100%', height: '100%'}}></div>
+                </section>
+                <section style={{width: '100%', height: '32.1%', marginBottom: '3.6%'}} className="wow rotateIn animated">
+                  <div id='data2' style={{width: '100%', height: '100%'}}></div>
+                </section>
+                <section style={{width: '100%', height: '32.1%'}} className="wow lightSpeedIn animated">
+                  <div id='data3' style={{width: '100%', height: '100%'}}></div>
+                </section>
+              </div>
+            </div>
+            <section style={{width: '100%', marginBottom: '1.3%', height: '39%'}} className="wow rotateInUpLeft animated">
+              <Header title='5G地区覆盖率'/>
+              <div id='area_conver_rate' style={{width: '100%', height: '100%', marginTop: '-35px'}}></div>
+            </section>
+          </div>
+        </div>
+      );
+    }
   }
 }
