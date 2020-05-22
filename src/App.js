@@ -6,7 +6,7 @@ import Table from "./components/Table";
 import CountUp from 'react-countup'
 import Loading from './components/Loading'
 import 'wowjs/css/libs/animate.css'
-import {WOW} from 'wowjs'
+import ReactWOW from 'react-wow'
 
 export default class App extends Component {
   constructor() {
@@ -52,14 +52,16 @@ export default class App extends Component {
   componentDidMount() {
     // 监听窗口变化
     window.addEventListener('resize', this.resizeEcharts)
-    let wow = new WOW({
-      live:false,
-      boxClass: 'wow',
-      animateClass: 'animated',
-      offset: 0,
-      mobile: true
-    })
-    wow.init();
+    // let wow = new WOW({
+    //   live:false,
+    //   boxClass: 'wow',
+    //   animateClass: 'animated',
+    //   offset: 100,
+    //   mobile: true,
+    //   scrollContainer:'#root'
+    // })
+    // wow.init()
+    // new WOW().init()
     setTimeout(() => {
       this.setState({
         loading: false
@@ -968,66 +970,86 @@ export default class App extends Component {
       return (
         <div className='wrap'>
           <div className='section_side'>
-            <section style={{width: '100%', height: '50%', marginBottom: '2%'}} className="wow fadeInLeftBig animated">
-              <Header title='5G省市区县覆盖率'/>
-              <div id='circle_info' style={{width: '80%', height: '93%', margin: '-20px 0 0 10%'}}></div>
-            </section>
-            <section style={{width: '100%', height: '50%'}} className="wow bounceInLeft animated">
-              <div id='city_user_info' style={{width: '100%', height: '100%'}}></div>
-            </section>
+            <ReactWOW animation='fadeInLeftBig'>
+              <section style={{width: '100%', height: '50%', marginBottom: '2%'}}>
+                <Header title='5G省市区县覆盖率'/>
+                <div id='circle_info' style={{width: '80%', height: '93%', margin: '-20px 0 0 10%'}}></div>
+              </section>
+            </ReactWOW>
+            <ReactWOW animation='bounceInLeft'>
+              <section style={{width: '100%', height: '50%'}}>
+                <div id='city_user_info' style={{width: '100%', height: '100%'}}></div>
+              </section>
+            </ReactWOW>
           </div>
           <div className='section_middle'>
-            <section style={{height: '10%', marginBottom: '1.3%', display: 'flex'}} className="wow flash animated">
-              <div className='section_middle_count'>
-                <CountUp style={{color: '#eb6161', fontSize: '24px'}} start={0} end={123123123} suffix=' 个'
-                         duration={4} separator=','/>
-                <div>总人数</div>
-              </div>
-              <div className='section_middle_count'>
-                <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={89} suffix=' %' duration={4}
-                         separator=','/>
-                <div>覆盖率</div>
-              </div>
-              <div className='section_middle_count'>
-                <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={209} suffix=' 个' duration={4}
-                         separator=','/>
-                <div>市数量</div>
-              </div>
-              <div className='section_middle_count'>
-                <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={90} suffix=' dB' duration={4}
-                         separator=','/>
-                <div>信号强度</div>
-              </div>
-            </section>
-            <section style={{width: '100%', marginBottom: '1.3%', height: '50%'}} className="wow bounceIn animated">
-              <div id='map_info' style={{width: '100%', height: '100%'}}></div>
-            </section>
-            <section style={{width: '100%', marginBottom: '1.3%', height: '38.9%', padding: 0}} className="wow fadeInUpBig animated">
-              <Table tableList={this.state.tableList}/>
-            </section>
+            <ReactWOW animation='flash'>
+              <section style={{height: '10%', marginBottom: '1.3%', display: 'flex'}}>
+                <div className='section_middle_count'>
+                  <CountUp style={{color: '#eb6161', fontSize: '24px'}} start={0} end={123123123} suffix=' 个'
+                           duration={4} separator=','/>
+                  <div>总人数</div>
+                </div>
+                <div className='section_middle_count'>
+                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={89} suffix=' %' duration={4}
+                           separator=','/>
+                  <div>覆盖率</div>
+                </div>
+                <div className='section_middle_count'>
+                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={209} suffix=' 个' duration={4}
+                           separator=','/>
+                  <div>市数量</div>
+                </div>
+                <div className='section_middle_count'>
+                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={90} suffix=' dB' duration={4}
+                           separator=','/>
+                  <div>信号强度</div>
+                </div>
+              </section>
+            </ReactWOW>
+            <ReactWOW animation='bounceIn'>
+              <section style={{width: '100%', marginBottom: '1.3%', height: '50%'}}>
+                <div id='map_info' style={{width: '100%', height: '100%'}}></div>
+              </section>
+            </ReactWOW>
+            <ReactWOW animation='fadeInUpBig'>
+              <section style={{width: '100%', marginBottom: '1.3%', height: '38.9%', padding: 0}}>
+                <Table tableList={this.state.tableList}/>
+              </section>
+            </ReactWOW>
           </div>
           <div className='section_side' style={{width: '36%'}}>
             <div style={{width: '100%', height: '61%', marginBottom: '1.3%', display: 'flex'}}>
-              <section style={{width: '56%', height: '100%'}} className="wow bounceInDown animated">
-                <Header title='5G地区人数排行TOP10'/>
-                <div id='user_info' style={{width: '100%', height: '100%'}}></div>
-              </section>
-              <div style={{width: '44%', height: '100%', marginLeft: '1.3%'}}>
-                <section style={{width: '100%%', height: '32.1%', marginBottom: '3.6%'}} className="wow flipInX animated">
-                  <div id='data1' style={{width: '100%', height: '100%'}}></div>
+              <ReactWOW animation='bounceInDown'>
+                <section style={{width: '56%', height: '100%'}}>
+                  <Header title='5G地区人数排行TOP10'/>
+                  <div id='user_info' style={{width: '100%', height: '100%'}}></div>
                 </section>
-                <section style={{width: '100%', height: '32.1%', marginBottom: '3.6%'}} className="wow rotateIn animated">
-                  <div id='data2' style={{width: '100%', height: '100%'}}></div>
-                </section>
-                <section style={{width: '100%', height: '32.1%'}} className="wow lightSpeedIn animated">
-                  <div id='data3' style={{width: '100%', height: '100%'}}></div>
-                </section>
+              </ReactWOW>
+              <div style={{width: '44%', height: '100%', marginLeft: '1.3%'}} className='three_echarts'>
+                <ReactWOW animation='flipInX'>
+                  <section style={{width: '100%%', height: '32.1%', marginBottom: '3.6%'}}>
+                    <div id='data1' style={{width: '100%', height: '100%'}}></div>
+                  </section>
+                </ReactWOW>
+                <ReactWOW animation='rotateIn'>
+                  <section style={{width: '100%', height: '32.1%', marginBottom: '3.6%'}}>
+                    <div id='data2' style={{width: '100%', height: '100%'}}></div>
+                  </section>
+                </ReactWOW>
+                <ReactWOW animation='lightSpeedIn'>
+                  <section style={{width: '100%', height: '32.1%'}}>
+                    <div id='data3' style={{width: '100%', height: '100%'}}></div>
+                  </section>
+                </ReactWOW>
               </div>
             </div>
-            <section style={{width: '100%', marginBottom: '1.3%', height: '39%'}} className="wow rotateInUpLeft animated">
-              <Header title='5G地区覆盖率'/>
-              <div id='area_conver_rate' style={{width: '100%', height: '100%', marginTop: '-35px'}}></div>
-            </section>
+            <ReactWOW animation='rotateInUpLeft'>
+              <section style={{width: '100%', marginBottom: '1.3%', height: '39%'}}>
+                <Header title='5G地区覆盖率'/>
+                <div id='area_conver_rate' style={{width: '100%', height: '100%', marginTop: '-35px'}}></div>
+              </section>
+            </ReactWOW>
           </div>
         </div>
       );
