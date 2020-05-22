@@ -31,7 +31,7 @@
 }
 
 .tbody ul {
-  height: 25%;
+  height: 100%;
   border: 1px #083a65 solid;
   border-left: none;
   border-right: none;
@@ -50,4 +50,38 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: center;
+}
+
+/*enter：入场前*/
+.fade-enter {
+  transform: translateY(300px);
+  opacity: 0;
+}
+
+/*enter-active：入场后到入场结束*/
+.fade-enter-active {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+/*enter-done：入场动画执行完毕后，保持状态*/
+.fade-enter-done {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+/*enter：出场前*/
+.fade-exit {
+  opacity: 1;
+}
+
+/*enter-active：出场后到出场结束*/
+.fade-exit-active {
+  transform: translateY(200px);
+  opacity: 0;
+}
+
+/*enter-done：出场动画执行完毕后，保持状态*/
+.fade-exit-done {
+  opacity: 0;
 }

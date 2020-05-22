@@ -13,191 +13,194 @@ export default class App extends Component {
     super()
     this.state = {
       loading: true,
-      echartsList: [], // echarts绘制的结果
-      tableList: [
-        {
-          province: '北京',
-          type: '5G',
-          cover: '90%',
-          time: '123'
-        },
-        {
-          province: '北京',
-          type: '5G',
-          cover: '90%',
-          time: '123'
-        },
-        {
-          province: '北京',
-          type: '5G',
-          cover: '90%',
-          time: '123'
-        },
-        {
-          province: '北京',
-          type: '5G',
-          cover: '90%',
-          time: '123'
-        },
-        {
-          province: '北京',
-          type: '5G',
-          cover: '90%',
-          time: '123'
-        },
-      ]
+      echartsList: new Map(), // echarts绘制的结果
+      tableList: [],
+      translateY: 0,
     }
   }
 
   componentDidMount() {
     // 监听窗口变化
     window.addEventListener('resize', this.resizeEcharts)
-    // let wow = new WOW({
-    //   live:false,
-    //   boxClass: 'wow',
-    //   animateClass: 'animated',
-    //   offset: 100,
-    //   mobile: true,
-    //   scrollContainer:'#root'
-    // })
-    // wow.init()
-    // new WOW().init()
     setTimeout(() => {
       this.setState({
         loading: false
       }, () => {
-        function randomValue() {
-          return Math.round(Math.random() * 1000);
-        }
-
-        // 渲染省市区县覆盖率
-        this.renderCircleInfo(
-          [
-            {
-              name: '省覆盖率',
-              value: 100,
-              per: '25%',
-            },
-            {
-              name: '市覆盖率',
-              value: 100,
-              per: '25%',
-            },
-            {
-              name: '区覆盖率',
-              value: 100,
-              per: '25%',
-            },
-            {
-              name: '县覆盖率',
-              value: 100,
-              per: '25%',
-            }
-          ]
-        )
-        // 渲染市区使用人数排行
-        this.renderCityUserInfo()
-        // 渲染使用人数数量
-        this.renderUserInfo(
-          [
-            {
-              name: '我',
-              value: 100
-            },
-            {
-              name: '我1',
-              value: 90
-            },
-            {
-              name: '我2',
-              value: 110
-            },
-            {
-              name: '我3',
-              value: 120
-            },
-            {
-              name: '我',
-              value: 60
-            },
-            {
-              name: '我1',
-              value: 79
-            },
-            {
-              name: '我2',
-              value: 90
-            },
-            {
-              name: '我3',
-              value: 100
-            },
-            {
-              name: '我3',
-              value: 110
-            },
-            {
-              name: '我3',
-              value: 122
-            },
-          ]
-        )
-        // 渲染地图覆盖率
-        this.renderMapInfo(
-          [
-            {name: "南海诸岛", value: 0},
-            {name: '北京', value: randomValue()},
-            {name: '天津', value: randomValue()},
-            {name: '上海', value: randomValue()},
-            {name: '重庆', value: randomValue()},
-            {name: '河北', value: randomValue()},
-            {name: '河南', value: randomValue()},
-            {name: '云南', value: randomValue()},
-            {name: '辽宁', value: randomValue()},
-            {name: '黑龙江', value: randomValue()},
-            {name: '湖南', value: randomValue()},
-            {name: '安徽', value: randomValue()},
-            {name: '山东', value: randomValue()},
-            {name: '新疆', value: randomValue()},
-            {name: '江苏', value: randomValue()},
-            {name: '浙江', value: randomValue()},
-            {name: '江西', value: randomValue()},
-            {name: '湖北', value: randomValue()},
-            {name: '广西', value: randomValue()},
-            {name: '甘肃', value: randomValue()},
-            {name: '山西', value: randomValue()},
-            {name: '内蒙古', value: randomValue()},
-            {name: '陕西', value: randomValue()},
-            {name: '吉林', value: randomValue()},
-            {name: '福建', value: randomValue()},
-            {name: '贵州', value: randomValue()},
-            {name: '广东', value: randomValue()},
-            {name: '青海', value: randomValue()},
-            {name: '西藏', value: randomValue()},
-            {name: '四川', value: randomValue()},
-            {name: '宁夏', value: randomValue()},
-            {name: '海南', value: randomValue()},
-            {name: '台湾', value: randomValue()},
-            {name: '香港', value: randomValue()},
-            {name: '澳门', value: randomValue()}
-          ]
-        )
-        // 渲染5G覆盖率
-        this.renderCoverRate()
-
-        this.render1()
-
-        this.render2()
-
-        this.render3()
+        this.actionRender()
+        setInterval(() => {
+          this.actionRender()
+        }, 2000)
       })
     }, 1000)
   }
 
+  actionRender = () => {
+    let list = [...this.state.tableList,{
+      province: '北京',
+      type: '5G',
+      cover: parseInt(Math.random() * 100) + '%',
+      time: new Date().toLocaleString()
+    },]
+    this.setState({
+      translateY: list.length > 5 ? this.state.translateY += 20 : this.state.translateY = 0,
+      tableList: list
+    })
+
+    // 渲染省市区县覆盖率
+    this.renderCircleInfo(
+      [
+        {
+          name: '省覆盖率',
+          value: parseInt(Math.random() * 100),
+          per: parseInt(Math.random() * 100) + '%',
+        },
+        {
+          name: '市覆盖率',
+          value: parseInt(Math.random() * 100),
+          per: parseInt(Math.random() * 100) + '%',
+        },
+        {
+          name: '区覆盖率',
+          value: parseInt(Math.random() * 100),
+          per: parseInt(Math.random() * 100) + '%',
+        },
+        {
+          name: '县覆盖率',
+          value: parseInt(Math.random() * 100),
+          per: parseInt(Math.random() * 100) + '%',
+        }
+      ]
+    )
+    // 渲染市区使用人数排行
+    this.renderCityUserInfo(
+      {
+        xData: ['北京', '天津', '上海', '深圳'],
+        province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
+        city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
+      }
+    )
+    // 渲染使用人数数量
+    this.renderUserInfo(
+      [
+        {
+          name: '北京',
+          value: parseInt(Math.random() * 100)
+        },
+        {
+          name: '上海',
+          value: parseInt(Math.random() * 100)
+        },
+        {
+          name: '深圳',
+          value: parseInt(Math.random() * 100)
+        },
+        {
+          name: '安徽',
+          value: parseInt(Math.random() * 100)
+        },
+        {
+          name: '天津',
+          value: parseInt(Math.random() * 100)
+        },
+        {
+          name: '包头',
+          value: parseInt(Math.random() * 100)
+        },
+        {
+          name: '呼市',
+          value: parseInt(Math.random() * 100)
+        },
+        {
+          name: '石家庄',
+          value: parseInt(Math.random() * 100)
+        },
+        {
+          name: '杭州',
+          value: parseInt(Math.random() * 100)
+        },
+        {
+          name: '太原',
+          value: parseInt(Math.random() * 100)
+        },
+      ]
+    )
+    // 渲染地图覆盖率
+    this.renderMapInfo(
+      [
+        {name: "南海诸岛", value: 0},
+        {name: '北京', value: parseInt(Math.random() * 1000)},
+        {name: '天津', value: parseInt(Math.random() * 1000)},
+        {name: '上海', value: parseInt(Math.random() * 1000)},
+        {name: '重庆', value: parseInt(Math.random() * 1000)},
+        {name: '河北', value: parseInt(Math.random() * 1000)},
+        {name: '河南', value: parseInt(Math.random() * 1000)},
+        {name: '云南', value: parseInt(Math.random() * 1000)},
+        {name: '辽宁', value: parseInt(Math.random() * 1000)},
+        {name: '黑龙江', value: parseInt(Math.random() * 1000)},
+        {name: '湖南', value: parseInt(Math.random() * 1000)},
+        {name: '安徽', value: parseInt(Math.random() * 1000)},
+        {name: '山东', value: parseInt(Math.random() * 1000)},
+        {name: '新疆', value: parseInt(Math.random() * 1000)},
+        {name: '江苏', value: parseInt(Math.random() * 1000)},
+        {name: '浙江', value: parseInt(Math.random() * 1000)},
+        {name: '江西', value: parseInt(Math.random() * 1000)},
+        {name: '湖北', value: parseInt(Math.random() * 1000)},
+        {name: '广西', value: parseInt(Math.random() * 1000)},
+        {name: '甘肃', value: parseInt(Math.random() * 1000)},
+        {name: '山西', value: parseInt(Math.random() * 1000)},
+        {name: '内蒙古', value: parseInt(Math.random() * 1000)},
+        {name: '陕西', value: parseInt(Math.random() * 1000)},
+        {name: '吉林', value: parseInt(Math.random() * 1000)},
+        {name: '福建', value: parseInt(Math.random() * 1000)},
+        {name: '贵州', value: parseInt(Math.random() * 1000)},
+        {name: '广东', value: parseInt(Math.random() * 1000)},
+        {name: '青海', value: parseInt(Math.random() * 1000)},
+        {name: '西藏', value: parseInt(Math.random() * 1000)},
+        {name: '四川', value: parseInt(Math.random() * 1000)},
+        {name: '宁夏', value: parseInt(Math.random() * 1000)},
+        {name: '海南', value: parseInt(Math.random() * 1000)},
+        {name: '台湾', value: parseInt(Math.random() * 1000)},
+        {name: '香港', value: parseInt(Math.random() * 1000)},
+        {name: '澳门', value: parseInt(Math.random() * 1000)}
+      ]
+    )
+    // 渲染5G覆盖率
+    this.renderCoverRate(
+      {
+        province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
+        city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
+      }
+    )
+
+    this.render1()
+
+    this.render2(
+      {
+        province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
+        city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
+      }
+    )
+
+    this.render3(
+      [
+        {value: parseInt(Math.random() * 600), name: '北京'},
+        {value: parseInt(Math.random() * 600), name: '上海'},
+        {value: parseInt(Math.random() * 600), name: '天津'},
+        {value: parseInt(Math.random() * 600), name: '深圳'},
+        {value: parseInt(Math.random() * 600), name: '杭州'}
+      ]
+    )
+  }
+
   // 渲染省市区县覆盖率数据
   renderCircleInfo = data => {
-    let dom = document.getElementById('circle_info')
-    let eCharts = echarts.init(dom)
+    let eCharts
+    if (this.state.echartsList.has('renderCircleInfo')) {
+      eCharts = this.state.echartsList.get('renderCircleInfo')
+    } else {
+      let dom = document.getElementById('circle_info')
+      eCharts = echarts.init(dom)
+    }
     let option = {
       color: ['#eb6161', '#facf22', '#41ddeb', '#6d69fa'],
       tooltip: {
@@ -308,20 +311,20 @@ export default class App extends Component {
     }
     eCharts.setOption(option, true)
     this.setState(state => {
-      state.echartsList.push(eCharts)
+      state.echartsList.set('renderCircleInfo', eCharts)
       return state
     })
   }
 
   // 渲染5G市区使用人数排行
-  renderCityUserInfo = apply => {
-    let dom = document.getElementById('city_user_info')
-    let eCharts = echarts.init(dom)
-
-    var dataAxis = ['点', '击', '柱', '子', '或'];
-    var data = [300, 202, 191, 234, 290];
-    var data1 = [190, 242, 211, 34, 190];
-
+  renderCityUserInfo = data => {
+    let eCharts
+    if (this.state.echartsList.has('renderCityUserInfo')) {
+      eCharts = this.state.echartsList.get('renderCityUserInfo')
+    } else {
+      let dom = document.getElementById('city_user_info')
+      eCharts = echarts.init(dom)
+    }
     let option = {
       grid: {
         width: 'auto',
@@ -341,12 +344,11 @@ export default class App extends Component {
       tooltip: {
         trigger: 'axis',
         formatter: function (params) {
-          // return `${params.marker} ${params.data.name}<br>数量 : ${params.data.value}`
-          return 1
+          return `地区：${params[0].name}<br>数量 : ${params[0].value} 个`
         }
       },
       xAxis: {
-        data: dataAxis,
+        data: data.xData,
         axisTick: {
           show: true
         },
@@ -421,7 +423,7 @@ export default class App extends Component {
               )
             }
           },
-          data: data
+          data: data.province
         },
         {
           name: '市',
@@ -448,21 +450,26 @@ export default class App extends Component {
               )
             }
           },
-          data: data1
+          data: data.city
         },
       ]
     };
     eCharts.setOption(option, true)
     this.setState(state => {
-      state.echartsList.push(eCharts)
+      state.echartsList.set('renderCityUserInfo', eCharts)
       return state
     })
   }
 
   // 渲染5G地区使用人数数量
   renderUserInfo = data => {
-    let dom = document.getElementById('user_info')
-    let eCharts = echarts.init(dom)
+    let eCharts
+    if (this.state.echartsList.has('renderUserInfo')) {
+      eCharts = this.state.echartsList.get('renderUserInfo')
+    } else {
+      let dom = document.getElementById('user_info')
+      eCharts = echarts.init(dom)
+    }
     let color = ['#EB6161', '#FACF22', '#F3EB23', '#41DDEB', '#00E17D', '#6D69FA', '#3564A9', '#41DDEB', '#70B7EE', '#3892E6']
     let option = {
       grid: {
@@ -475,8 +482,7 @@ export default class App extends Component {
       tooltip: {
         trigger: 'axis',
         formatter: function (params) {
-          // return `${params.marker} ${params.data.name}<br>数量 : ${params.data.value}`
-          return 1
+          return `${params[0].marker}${params[0].name}<br>数量 : ${params[0].value}个`
         }
       },
       xAxis: {
@@ -550,15 +556,20 @@ export default class App extends Component {
     }
     eCharts.setOption(option, true)
     this.setState(state => {
-      state.echartsList.push(eCharts)
+      state.echartsList.set('renderUserInfo', eCharts)
       return state
     })
   }
 
   // 渲染地图覆盖率
   renderMapInfo = data => {
-    let dom = document.getElementById('map_info')
-    let eCharts = echarts.init(dom)
+    let eCharts
+    if (this.state.echartsList.has('renderMapInfo')) {
+      eCharts = this.state.echartsList.get('renderMapInfo')
+    } else {
+      let dom = document.getElementById('map_info')
+      eCharts = echarts.init(dom)
+    }
     let option = {
       tooltip: {
         formatter: function (params, ticket, callback) {
@@ -623,15 +634,20 @@ export default class App extends Component {
     }
     eCharts.setOption(option, true)
     this.setState(state => {
-      state.echartsList.push(eCharts)
+      state.echartsList.set('renderMapInfo', eCharts)
       return state
     })
   }
 
   // 渲染5G覆盖率折线图
   renderCoverRate = data => {
-    let dom = document.getElementById('area_conver_rate')
-    let eCharts = echarts.init(dom)
+    let eCharts
+    if (this.state.echartsList.has('renderCoverRate')) {
+      eCharts = this.state.echartsList.get('renderCoverRate')
+    } else {
+      let dom = document.getElementById('area_conver_rate')
+      eCharts = echarts.init(dom)
+    }
     var colors = ['#5793f3', '#d14a61', '#675bba'];
 
     let option = {
@@ -744,26 +760,31 @@ export default class App extends Component {
           type: 'line',
           xAxisIndex: 1,
           smooth: true,
-          data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+          data: data.province
         },
         {
           name: '市覆盖率',
           type: 'line',
           smooth: true,
-          data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
+          data: data.city
         }
       ]
     };
     eCharts.setOption(option, true)
     this.setState(state => {
-      state.echartsList.push(eCharts)
+      state.echartsList.set('renderCoverRate', eCharts)
       return state
     })
   }
 
   render1 = data => {
-    let dom = document.getElementById('data1')
-    let eCharts = echarts.init(dom)
+    let eCharts
+    if (this.state.echartsList.has('render1')) {
+      eCharts = this.state.echartsList.get('render1')
+    } else {
+      let dom = document.getElementById('data1')
+      eCharts = echarts.init(dom)
+    }
     let option = {
       visualMap: {
         show: false,
@@ -782,7 +803,7 @@ export default class App extends Component {
       },
       series: (function () {
         var series = [];
-        for (var i = 1; i <= 28; i++) {
+        for (var i = 1; i <= parseInt(Math.random() * 100); i++) {
           series.push({
             name: '浏览器（数据纯属虚构）',
             type: 'radar',
@@ -799,9 +820,9 @@ export default class App extends Component {
               value: [
                 (40 - i) * 10,
                 (38 - i) * 4 + 60,
-                i * 5 + 10,
-                i * 9,
-                i * i / 2
+                i * 5 + 40,
+                i * 12,
+                i * i
               ],
               name: i + 2000 + ''
             }]
@@ -813,14 +834,19 @@ export default class App extends Component {
 
     eCharts.setOption(option, true)
     this.setState(state => {
-      state.echartsList.push(eCharts)
+      state.echartsList.set('render1', eCharts)
       return state
     })
   }
 
   render2 = data => {
-    let dom = document.getElementById('data2')
-    let eCharts = echarts.init(dom)
+    let eCharts
+    if (this.state.echartsList.has('render2')) {
+      eCharts = this.state.echartsList.get('render2')
+    } else {
+      let dom = document.getElementById('data2')
+      eCharts = echarts.init(dom)
+    }
     let option = {
       color: ['#3892E6'],
       grid: {
@@ -863,12 +889,12 @@ export default class App extends Component {
       },
       series: [
         {
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          data: data.province,
           type: 'line',
           smooth: true,
         },
         {
-          data: [1123, 522, 451, 514, 990, 130, 320],
+          data: data.city,
           type: 'line',
           smooth: true,
         },
@@ -877,14 +903,19 @@ export default class App extends Component {
 
     eCharts.setOption(option, true)
     this.setState(state => {
-      state.echartsList.push(eCharts)
+      state.echartsList.set('render2', eCharts)
       return state
     })
   }
 
   render3 = data => {
-    let dom = document.getElementById('data3')
-    let eCharts = echarts.init(dom)
+    let eCharts
+    if (this.state.echartsList.has('render3')) {
+      eCharts = this.state.echartsList.get('render3')
+    } else {
+      let dom = document.getElementById('data3')
+      eCharts = echarts.init(dom)
+    }
     let option = {
 
       tooltip: {
@@ -906,18 +937,12 @@ export default class App extends Component {
           type: 'pie',
           radius: '70%',
           center: ['50%', '50%'],
-          data: [
-            {value: 335, name: '直接访问'},
-            {value: 310, name: '邮件营销'},
-            {value: 274, name: '联盟广告'},
-            {value: 235, name: '视频广告'},
-            {value: 400, name: '搜索引擎'}
-          ].sort(function (a, b) {
+          data: data.sort(function (a, b) {
             return a.value - b.value;
           }),
           roseType: 'radius',
           label: {
-            color: 'rgba(255, 255, 255, 0.3)'
+            color: '#b0becc'
           },
           labelLine: {
             lineStyle: {
@@ -945,14 +970,14 @@ export default class App extends Component {
 
     eCharts.setOption(option, true)
     this.setState(state => {
-      state.echartsList.push(eCharts)
+      state.echartsList.set('render3', eCharts)
       return state
     })
   }
 
   // 重拍重绘echarts图表
   resizeEcharts = () => {
-    this.state.echartsList.map(item => {
+    this.state.echartsList.forEach(item => {
       // item.resize()
       setTimeout(() => {
         item.resize()
@@ -986,22 +1011,26 @@ export default class App extends Component {
             <ReactWOW animation='flash'>
               <section style={{height: '10%', marginBottom: '1.3%', display: 'flex'}}>
                 <div className='section_middle_count'>
-                  <CountUp style={{color: '#eb6161', fontSize: '24px'}} start={0} end={123123123} suffix=' 个'
+                  <CountUp style={{color: '#eb6161', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 10000)}
+                           suffix=' 个'
                            duration={4} separator=','/>
                   <div>总人数</div>
                 </div>
                 <div className='section_middle_count'>
-                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={89} suffix=' %' duration={4}
+                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 100)}
+                           suffix=' %' duration={4}
                            separator=','/>
                   <div>覆盖率</div>
                 </div>
                 <div className='section_middle_count'>
-                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={209} suffix=' 个' duration={4}
+                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 1000)}
+                           suffix=' 个' duration={4}
                            separator=','/>
                   <div>市数量</div>
                 </div>
                 <div className='section_middle_count'>
-                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={90} suffix=' dB' duration={4}
+                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 100)}
+                           suffix=' dB' duration={4}
                            separator=','/>
                   <div>信号强度</div>
                 </div>
@@ -1014,7 +1043,7 @@ export default class App extends Component {
             </ReactWOW>
             <ReactWOW animation='fadeInUpBig'>
               <section style={{width: '100%', marginBottom: '1.3%', height: '38.9%', padding: 0}}>
-                <Table tableList={this.state.tableList}/>
+                <Table tableList={this.state.tableList} translateY={this.state.translateY}/>
               </section>
             </ReactWOW>
           </div>

@@ -8,6 +8,7 @@
     "react": "^16.13.1",
     "react-countup": "^4.3.3",
     "react-dom": "^16.13.1",
+    "react-transition-group": "^4.4.1",
     "react-wow": "^1.0.0",
     "wowjs": "^1.1.3"
   },
