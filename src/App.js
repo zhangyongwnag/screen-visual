@@ -8,6 +8,8 @@ import Loading from './components/Loading'
 import 'wowjs/css/libs/animate.css'
 import ReactWOW from 'react-wow'
 
+let socket = require('socket.io-client')('http://127.0.0.1:8888')
+
 export default class App extends Component {
   constructor() {
     super()
@@ -22,174 +24,314 @@ export default class App extends Component {
   componentDidMount() {
     // 监听窗口变化
     window.addEventListener('resize', this.resizeEcharts)
+
+    /***********************socket方式，需要启动node服务器*****************************/
+
+    // socket.on('open', data => {
+    //   console.log(data)
+    //   if (this.state.loading) {
+    //     this.setState({
+    //       loading: false
+    //     }, () => {
+    //       this.actionRender(data)
+    //     })
+    //   }else {
+    //     this.actionRender(data)
+    //   }
+    // })
+
+    /***********************模式方式*****************************/
     setTimeout(() => {
       this.setState({
         loading: false
       }, () => {
-        this.actionRender()
+        this.actionRender({
+          scrollData: {
+            province: '北京',
+            type: '5G',
+            cover: parseInt(Math.random() * 100) + '%',
+            time: new Date().toLocaleString()
+          },
+          circleInfo: [
+            {
+              name: '省覆盖率',
+              value: parseInt(Math.random() * 100),
+              per: parseInt(Math.random() * 100) + '%',
+            },
+            {
+              name: '市覆盖率',
+              value: parseInt(Math.random() * 100),
+              per: parseInt(Math.random() * 100) + '%',
+            },
+            {
+              name: '区覆盖率',
+              value: parseInt(Math.random() * 100),
+              per: parseInt(Math.random() * 100) + '%',
+            },
+            {
+              name: '县覆盖率',
+              value: parseInt(Math.random() * 100),
+              per: parseInt(Math.random() * 100) + '%',
+            }
+          ],
+          cityUserInfo: {
+            xData: ['北京', '天津', '上海', '深圳'],
+            province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
+            city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
+          },
+          useUserInfo: [
+            {
+              name: '北京',
+              value: parseInt(Math.random() * 100)
+            },
+            {
+              name: '上海',
+              value: parseInt(Math.random() * 100)
+            },
+            {
+              name: '深圳',
+              value: parseInt(Math.random() * 100)
+            },
+            {
+              name: '安徽',
+              value: parseInt(Math.random() * 100)
+            },
+            {
+              name: '天津',
+              value: parseInt(Math.random() * 100)
+            },
+            {
+              name: '包头',
+              value: parseInt(Math.random() * 100)
+            },
+            {
+              name: '呼市',
+              value: parseInt(Math.random() * 100)
+            },
+            {
+              name: '石家庄',
+              value: parseInt(Math.random() * 100)
+            },
+            {
+              name: '杭州',
+              value: parseInt(Math.random() * 100)
+            },
+            {
+              name: '太原',
+              value: parseInt(Math.random() * 100)
+            },
+          ],
+          mapInfo: [
+            {name: "南海诸岛", value: 0},
+            {name: '北京', value: parseInt(Math.random() * 1000)},
+            {name: '天津', value: parseInt(Math.random() * 1000)},
+            {name: '上海', value: parseInt(Math.random() * 1000)},
+            {name: '重庆', value: parseInt(Math.random() * 1000)},
+            {name: '河北', value: parseInt(Math.random() * 1000)},
+            {name: '河南', value: parseInt(Math.random() * 1000)},
+            {name: '云南', value: parseInt(Math.random() * 1000)},
+            {name: '辽宁', value: parseInt(Math.random() * 1000)},
+            {name: '黑龙江', value: parseInt(Math.random() * 1000)},
+            {name: '湖南', value: parseInt(Math.random() * 1000)},
+            {name: '安徽', value: parseInt(Math.random() * 1000)},
+            {name: '山东', value: parseInt(Math.random() * 1000)},
+            {name: '新疆', value: parseInt(Math.random() * 1000)},
+            {name: '江苏', value: parseInt(Math.random() * 1000)},
+            {name: '浙江', value: parseInt(Math.random() * 1000)},
+            {name: '江西', value: parseInt(Math.random() * 1000)},
+            {name: '湖北', value: parseInt(Math.random() * 1000)},
+            {name: '广西', value: parseInt(Math.random() * 1000)},
+            {name: '甘肃', value: parseInt(Math.random() * 1000)},
+            {name: '山西', value: parseInt(Math.random() * 1000)},
+            {name: '内蒙古', value: parseInt(Math.random() * 1000)},
+            {name: '陕西', value: parseInt(Math.random() * 1000)},
+            {name: '吉林', value: parseInt(Math.random() * 1000)},
+            {name: '福建', value: parseInt(Math.random() * 1000)},
+            {name: '贵州', value: parseInt(Math.random() * 1000)},
+            {name: '广东', value: parseInt(Math.random() * 1000)},
+            {name: '青海', value: parseInt(Math.random() * 1000)},
+            {name: '西藏', value: parseInt(Math.random() * 1000)},
+            {name: '四川', value: parseInt(Math.random() * 1000)},
+            {name: '宁夏', value: parseInt(Math.random() * 1000)},
+            {name: '海南', value: parseInt(Math.random() * 1000)},
+            {name: '台湾', value: parseInt(Math.random() * 1000)},
+            {name: '香港', value: parseInt(Math.random() * 1000)},
+            {name: '澳门', value: parseInt(Math.random() * 1000)}
+          ],
+          coverRate: {
+            province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
+            city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
+          },
+          data2: {
+            province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
+            city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
+          },
+          data3: [
+            {value: parseInt(Math.random() * 600), name: '北京'},
+            {value: parseInt(Math.random() * 600), name: '上海'},
+            {value: parseInt(Math.random() * 600), name: '天津'},
+            {value: parseInt(Math.random() * 600), name: '深圳'},
+            {value: parseInt(Math.random() * 600), name: '杭州'}
+          ]
+        })
         setInterval(() => {
-          this.actionRender()
+          this.actionRender({
+            scrollData: {
+              province: '北京',
+              type: '5G',
+              cover: parseInt(Math.random() * 100) + '%',
+              time: new Date().toLocaleString()
+            },
+            circleInfo: [
+              {
+                name: '省覆盖率',
+                value: parseInt(Math.random() * 100),
+                per: parseInt(Math.random() * 100) + '%',
+              },
+              {
+                name: '市覆盖率',
+                value: parseInt(Math.random() * 100),
+                per: parseInt(Math.random() * 100) + '%',
+              },
+              {
+                name: '区覆盖率',
+                value: parseInt(Math.random() * 100),
+                per: parseInt(Math.random() * 100) + '%',
+              },
+              {
+                name: '县覆盖率',
+                value: parseInt(Math.random() * 100),
+                per: parseInt(Math.random() * 100) + '%',
+              }
+            ],
+            cityUserInfo: {
+              xData: ['北京', '天津', '上海', '深圳'],
+              province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
+              city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
+            },
+            useUserInfo: [
+              {
+                name: '北京',
+                value: parseInt(Math.random() * 100)
+              },
+              {
+                name: '上海',
+                value: parseInt(Math.random() * 100)
+              },
+              {
+                name: '深圳',
+                value: parseInt(Math.random() * 100)
+              },
+              {
+                name: '安徽',
+                value: parseInt(Math.random() * 100)
+              },
+              {
+                name: '天津',
+                value: parseInt(Math.random() * 100)
+              },
+              {
+                name: '包头',
+                value: parseInt(Math.random() * 100)
+              },
+              {
+                name: '呼市',
+                value: parseInt(Math.random() * 100)
+              },
+              {
+                name: '石家庄',
+                value: parseInt(Math.random() * 100)
+              },
+              {
+                name: '杭州',
+                value: parseInt(Math.random() * 100)
+              },
+              {
+                name: '太原',
+                value: parseInt(Math.random() * 100)
+              },
+            ],
+            mapInfo: [
+              {name: "南海诸岛", value: 0},
+              {name: '北京', value: parseInt(Math.random() * 1000)},
+              {name: '天津', value: parseInt(Math.random() * 1000)},
+              {name: '上海', value: parseInt(Math.random() * 1000)},
+              {name: '重庆', value: parseInt(Math.random() * 1000)},
+              {name: '河北', value: parseInt(Math.random() * 1000)},
+              {name: '河南', value: parseInt(Math.random() * 1000)},
+              {name: '云南', value: parseInt(Math.random() * 1000)},
+              {name: '辽宁', value: parseInt(Math.random() * 1000)},
+              {name: '黑龙江', value: parseInt(Math.random() * 1000)},
+              {name: '湖南', value: parseInt(Math.random() * 1000)},
+              {name: '安徽', value: parseInt(Math.random() * 1000)},
+              {name: '山东', value: parseInt(Math.random() * 1000)},
+              {name: '新疆', value: parseInt(Math.random() * 1000)},
+              {name: '江苏', value: parseInt(Math.random() * 1000)},
+              {name: '浙江', value: parseInt(Math.random() * 1000)},
+              {name: '江西', value: parseInt(Math.random() * 1000)},
+              {name: '湖北', value: parseInt(Math.random() * 1000)},
+              {name: '广西', value: parseInt(Math.random() * 1000)},
+              {name: '甘肃', value: parseInt(Math.random() * 1000)},
+              {name: '山西', value: parseInt(Math.random() * 1000)},
+              {name: '内蒙古', value: parseInt(Math.random() * 1000)},
+              {name: '陕西', value: parseInt(Math.random() * 1000)},
+              {name: '吉林', value: parseInt(Math.random() * 1000)},
+              {name: '福建', value: parseInt(Math.random() * 1000)},
+              {name: '贵州', value: parseInt(Math.random() * 1000)},
+              {name: '广东', value: parseInt(Math.random() * 1000)},
+              {name: '青海', value: parseInt(Math.random() * 1000)},
+              {name: '西藏', value: parseInt(Math.random() * 1000)},
+              {name: '四川', value: parseInt(Math.random() * 1000)},
+              {name: '宁夏', value: parseInt(Math.random() * 1000)},
+              {name: '海南', value: parseInt(Math.random() * 1000)},
+              {name: '台湾', value: parseInt(Math.random() * 1000)},
+              {name: '香港', value: parseInt(Math.random() * 1000)},
+              {name: '澳门', value: parseInt(Math.random() * 1000)}
+            ],
+            coverRate: {
+              province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
+              city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
+            },
+            data2: {
+              province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
+              city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
+            },
+            data3: [
+              {value: parseInt(Math.random() * 600), name: '北京'},
+              {value: parseInt(Math.random() * 600), name: '上海'},
+              {value: parseInt(Math.random() * 600), name: '天津'},
+              {value: parseInt(Math.random() * 600), name: '深圳'},
+              {value: parseInt(Math.random() * 600), name: '杭州'}
+            ]
+          })
         }, 2000)
       })
     }, 1000)
   }
 
-  actionRender = () => {
-    let list = [...this.state.tableList,{
-      province: '北京',
-      type: '5G',
-      cover: parseInt(Math.random() * 100) + '%',
-      time: new Date().toLocaleString()
-    },]
+  actionRender = data => {
+    let list = [...this.state.tableList,data.scrollData]
     this.setState({
       translateY: list.length > 5 ? this.state.translateY += 20 : this.state.translateY = 0,
       tableList: list
     })
 
     // 渲染省市区县覆盖率
-    this.renderCircleInfo(
-      [
-        {
-          name: '省覆盖率',
-          value: parseInt(Math.random() * 100),
-          per: parseInt(Math.random() * 100) + '%',
-        },
-        {
-          name: '市覆盖率',
-          value: parseInt(Math.random() * 100),
-          per: parseInt(Math.random() * 100) + '%',
-        },
-        {
-          name: '区覆盖率',
-          value: parseInt(Math.random() * 100),
-          per: parseInt(Math.random() * 100) + '%',
-        },
-        {
-          name: '县覆盖率',
-          value: parseInt(Math.random() * 100),
-          per: parseInt(Math.random() * 100) + '%',
-        }
-      ]
-    )
+    this.renderCircleInfo(data.circleInfo)
     // 渲染市区使用人数排行
-    this.renderCityUserInfo(
-      {
-        xData: ['北京', '天津', '上海', '深圳'],
-        province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
-        city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
-      }
-    )
+    this.renderCityUserInfo(data.cityUserInfo)
     // 渲染使用人数数量
-    this.renderUserInfo(
-      [
-        {
-          name: '北京',
-          value: parseInt(Math.random() * 100)
-        },
-        {
-          name: '上海',
-          value: parseInt(Math.random() * 100)
-        },
-        {
-          name: '深圳',
-          value: parseInt(Math.random() * 100)
-        },
-        {
-          name: '安徽',
-          value: parseInt(Math.random() * 100)
-        },
-        {
-          name: '天津',
-          value: parseInt(Math.random() * 100)
-        },
-        {
-          name: '包头',
-          value: parseInt(Math.random() * 100)
-        },
-        {
-          name: '呼市',
-          value: parseInt(Math.random() * 100)
-        },
-        {
-          name: '石家庄',
-          value: parseInt(Math.random() * 100)
-        },
-        {
-          name: '杭州',
-          value: parseInt(Math.random() * 100)
-        },
-        {
-          name: '太原',
-          value: parseInt(Math.random() * 100)
-        },
-      ]
-    )
+    this.renderUserInfo(data.useUserInfo)
     // 渲染地图覆盖率
-    this.renderMapInfo(
-      [
-        {name: "南海诸岛", value: 0},
-        {name: '北京', value: parseInt(Math.random() * 1000)},
-        {name: '天津', value: parseInt(Math.random() * 1000)},
-        {name: '上海', value: parseInt(Math.random() * 1000)},
-        {name: '重庆', value: parseInt(Math.random() * 1000)},
-        {name: '河北', value: parseInt(Math.random() * 1000)},
-        {name: '河南', value: parseInt(Math.random() * 1000)},
-        {name: '云南', value: parseInt(Math.random() * 1000)},
-        {name: '辽宁', value: parseInt(Math.random() * 1000)},
-        {name: '黑龙江', value: parseInt(Math.random() * 1000)},
-        {name: '湖南', value: parseInt(Math.random() * 1000)},
-        {name: '安徽', value: parseInt(Math.random() * 1000)},
-        {name: '山东', value: parseInt(Math.random() * 1000)},
-        {name: '新疆', value: parseInt(Math.random() * 1000)},
-        {name: '江苏', value: parseInt(Math.random() * 1000)},
-        {name: '浙江', value: parseInt(Math.random() * 1000)},
-        {name: '江西', value: parseInt(Math.random() * 1000)},
-        {name: '湖北', value: parseInt(Math.random() * 1000)},
-        {name: '广西', value: parseInt(Math.random() * 1000)},
-        {name: '甘肃', value: parseInt(Math.random() * 1000)},
-        {name: '山西', value: parseInt(Math.random() * 1000)},
-        {name: '内蒙古', value: parseInt(Math.random() * 1000)},
-        {name: '陕西', value: parseInt(Math.random() * 1000)},
-        {name: '吉林', value: parseInt(Math.random() * 1000)},
-        {name: '福建', value: parseInt(Math.random() * 1000)},
-        {name: '贵州', value: parseInt(Math.random() * 1000)},
-        {name: '广东', value: parseInt(Math.random() * 1000)},
-        {name: '青海', value: parseInt(Math.random() * 1000)},
-        {name: '西藏', value: parseInt(Math.random() * 1000)},
-        {name: '四川', value: parseInt(Math.random() * 1000)},
-        {name: '宁夏', value: parseInt(Math.random() * 1000)},
-        {name: '海南', value: parseInt(Math.random() * 1000)},
-        {name: '台湾', value: parseInt(Math.random() * 1000)},
-        {name: '香港', value: parseInt(Math.random() * 1000)},
-        {name: '澳门', value: parseInt(Math.random() * 1000)}
-      ]
-    )
+    this.renderMapInfo(data.mapInfo)
     // 渲染5G覆盖率
-    this.renderCoverRate(
-      {
-        province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
-        city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
-      }
-    )
+    this.renderCoverRate(data.coverRate)
 
     this.render1()
 
-    this.render2(
-      {
-        province: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)],
-        city: [parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000), parseInt(Math.random() * 1000)]
-      }
-    )
+    this.render2(data.data2)
 
-    this.render3(
-      [
-        {value: parseInt(Math.random() * 600), name: '北京'},
-        {value: parseInt(Math.random() * 600), name: '上海'},
-        {value: parseInt(Math.random() * 600), name: '天津'},
-        {value: parseInt(Math.random() * 600), name: '深圳'},
-        {value: parseInt(Math.random() * 600), name: '杭州'}
-      ]
-    )
+    this.render3(data.data3)
   }
 
   // 渲染省市区县覆盖率数据
