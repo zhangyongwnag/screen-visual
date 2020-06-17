@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import echarts from 'echarts'
-import china from './asset/js/china'
+import china from 'echarts/map/js/china'
 import Header from './components/Header'
 import Table from "./components/Table";
-import CountUp from 'react-countup'
+// import CountUp from 'react-countup'
 import Loading from './components/Loading'
 import 'wowjs/css/libs/animate.css'
 import ReactWOW from 'react-wow'
@@ -1153,25 +1153,25 @@ export default class App extends Component {
             <ReactWOW animation='flash'>
               <section style={{height: '10%', marginBottom: '1.3%', display: 'flex'}}>
                 <div className='section_middle_count'>
-                  <CountUp style={{color: '#eb6161', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 10000)}
+                  <div style={{color: '#eb6161', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 10000)}
                            suffix=' 个'
                            duration={4} separator=','/>
                   <div>总人数</div>
                 </div>
                 <div className='section_middle_count'>
-                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 100)}
+                  <div style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 100)}
                            suffix=' %' duration={4}
                            separator=','/>
                   <div>覆盖率</div>
                 </div>
                 <div className='section_middle_count'>
-                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 1000)}
+                  <div style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 1000)}
                            suffix=' 个' duration={4}
                            separator=','/>
                   <div>市数量</div>
                 </div>
                 <div className='section_middle_count'>
-                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 100)}
+                  <div style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 100)}
                            suffix=' dB' duration={4}
                            separator=','/>
                   <div>信号强度</div>
