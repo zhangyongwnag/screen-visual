@@ -8,3 +8,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+module.hot.accept()
+
