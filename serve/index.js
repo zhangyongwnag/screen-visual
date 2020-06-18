@@ -148,7 +148,7 @@ io.on('connection', socket => {
         {value: parseInt(Math.random() * 600), name: '杭州'}
       ]
     })
-  }, 2000)
+  }, 1000)
 
   socket.on('disconnect', () => {
     socket.broadcast.emit('关闭')

@@ -3,6 +3,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+const path = require('path')
 const paths = require('./paths');
 
 module.exports = {
@@ -62,6 +63,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title:'大屏-数据可视化',
+      favicon: path.resolve(__dirname,'../public/favicon.ico'),
       filename: 'index.html',
       template: paths.appHtml,
       inject: true,

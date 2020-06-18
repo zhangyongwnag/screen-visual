@@ -8,5 +8,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-module.hot.accept()
-
+// 热模块更新
+if (module.hot) {
+  module.hot.accept()
+}

@@ -40,7 +40,3 @@ export function debounce(fn,delay = 2000) {
     fn.call(this,args)
   },delay)
 }
-
-module.hot.accept()
-
-
