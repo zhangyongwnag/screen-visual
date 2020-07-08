@@ -8,6 +8,13 @@ import Loading from './components/Loading'
 import 'wowjs/css/libs/animate.css'
 import ReactWOW from 'react-wow'
 import * as util from './util/index'
+import {BorderBox6} from '@jiaminghi/data-view-react'
+import {BorderBox7} from '@jiaminghi/data-view-react'
+import {BorderBox8} from '@jiaminghi/data-view-react'
+import {BorderBox9} from '@jiaminghi/data-view-react'
+import {BorderBox10} from '@jiaminghi/data-view-react'
+import {BorderBox11} from '@jiaminghi/data-view-react'
+import {BorderBox12} from '@jiaminghi/data-view-react'
 
 let socket
 if (process.env.NODE_ENV !== 'production') {
@@ -40,7 +47,6 @@ export default class App extends Component {
     if (process.env.NODE_ENV !== 'production') {
       /***********************socket方式，需要启动node服务器*****************************/
       socket.on('open', data => {
-        console.log(data)
         if (this.state.loading) {
           this.setState({
             loading: false
@@ -1054,48 +1060,59 @@ export default class App extends Component {
           <div className='section_side'>
             <ReactWOW animation='fadeInLeftBig'>
               <section style={{width: '100%', height: '50%', marginBottom: '2%'}}>
-                <Header title='5G省市区县覆盖率'/>
-                <div id='circle_info' style={{width: '80%', height: '93%', margin: '-20px 0 0 10%'}}></div>
+                <BorderBox7 color={['#083a65']}>
+                  <Header title='5G省市区县覆盖率'/>
+                  <div id='circle_info' style={{width: '80%', height: '93%', margin: '-20px 0 0 10%'}}></div>
+                </BorderBox7>
               </section>
             </ReactWOW>
             <ReactWOW animation='bounceInLeft'>
               <section style={{width: '100%', height: '50%'}}>
-                <div id='city_user_info' style={{width: '100%', height: '100%'}}></div>
+                <BorderBox7 color={['#083a65']}>
+                  <div id='city_user_info' style={{width: '100%', height: '100%'}}></div>
+                </BorderBox7>
               </section>
             </ReactWOW>
           </div>
           <div className='section_middle'>
             <ReactWOW animation='flash'>
-              <section style={{height: '10%', marginBottom: '1.3%', display: 'flex'}}>
-                <div className='section_middle_count'>
-                  <CountUp style={{color: '#eb6161', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 10000)}
-                           suffix=' 个'
-                           duration={4} separator=','/>
-                  <div>总人数</div>
-                </div>
-                <div className='section_middle_count'>
-                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 100)}
-                           suffix=' %' duration={4}
-                           separator=','/>
-                  <div>覆盖率</div>
-                </div>
-                <div className='section_middle_count'>
-                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 1000)}
-                           suffix=' 个' duration={4}
-                           separator=','/>
-                  <div>市数量</div>
-                </div>
-                <div className='section_middle_count'>
-                  <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 100)}
-                           suffix=' dB' duration={4}
-                           separator=','/>
-                  <div>信号强度</div>
-                </div>
+              <section style={{height: '10%', marginBottom: '1.3%'}}>
+                <BorderBox7 color={['#083a65']}>
+                  <div style={{display: 'flex'}}>
+                    <div className='section_middle_count'>
+                      <CountUp style={{color: '#eb6161', fontSize: '24px'}} start={0}
+                               end={parseInt(Math.random() * 10000)}
+                               suffix=' 个'
+                               duration={4} separator=','/>
+                      <div>总人数</div>
+                    </div>
+                    <div className='section_middle_count'>
+                      <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 100)}
+                               suffix=' %' duration={4}
+                               separator=','/>
+                      <div>覆盖率</div>
+                    </div>
+                    <div className='section_middle_count'>
+                      <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 1000)}
+                               suffix=' 个' duration={4}
+                               separator=','/>
+                      <div>市数量</div>
+                    </div>
+                    <div className='section_middle_count'>
+                      <CountUp style={{color: '#facf22', fontSize: '24px'}} start={0} end={parseInt(Math.random() * 100)}
+                               suffix=' dB' duration={4}
+                               separator=','/>
+                      <div>信号强度</div>
+                    </div>
+                  </div>
+                </BorderBox7>
               </section>
             </ReactWOW>
             <ReactWOW animation='bounceIn'>
               <section style={{width: '100%', marginBottom: '1.3%', height: '50%'}}>
-                <div id='map_info' style={{width: '100%', height: '100%'}}></div>
+                <BorderBox7 color={['#083a65']}>
+                  <div id='map_info' style={{width: '100%', height: '100%'}}></div>
+                </BorderBox7>
               </section>
             </ReactWOW>
             <ReactWOW animation='fadeInUpBig'>
@@ -1108,32 +1125,42 @@ export default class App extends Component {
             <div style={{width: '100%', height: '61%', marginBottom: '1.3%', display: 'flex'}}>
               <ReactWOW animation='bounceInDown'>
                 <section style={{width: '56%', height: '100%'}}>
-                  <Header title='5G地区人数排行TOP10'/>
-                  <div id='user_info' style={{width: '100%', height: '100%'}}></div>
+                  <BorderBox7 color={['#083a65']}>
+                    <Header title='5G地区人数排行TOP10'/>
+                    <div id='user_info' style={{width: '100%', height: '100%'}}></div>
+                  </BorderBox7>
                 </section>
               </ReactWOW>
               <div style={{width: '44%', height: '100%', marginLeft: '1.3%'}} className='three_echarts'>
                 <ReactWOW animation='flipInX'>
                   <section style={{width: '100%%', height: '32.1%', marginBottom: '3.6%'}}>
-                    <div id='data1' style={{width: '100%', height: '100%'}}></div>
+                    <BorderBox7 color={['#083a65']}>
+                      <div id='data1' style={{width: '100%', height: '100%'}}></div>
+                    </BorderBox7>
                   </section>
                 </ReactWOW>
                 <ReactWOW animation='rotateIn'>
                   <section style={{width: '100%', height: '32.1%', marginBottom: '3.6%'}}>
-                    <div id='data2' style={{width: '100%', height: '100%'}}></div>
+                    <BorderBox7 color={['#083a65']}>
+                      <div id='data2' style={{width: '100%', height: '100%'}}></div>
+                    </BorderBox7>
                   </section>
                 </ReactWOW>
                 <ReactWOW animation='lightSpeedIn'>
                   <section style={{width: '100%', height: '32.1%'}}>
-                    <div id='data3' style={{width: '100%', height: '100%'}}></div>
+                    <BorderBox7 color={['#083a65']}>
+                      <div id='data3' style={{width: '100%', height: '100%'}}></div>
+                    </BorderBox7>
                   </section>
                 </ReactWOW>
               </div>
             </div>
             <ReactWOW animation='rotateInUpLeft'>
               <section style={{width: '100%', marginBottom: '1.3%', height: '39%'}}>
-                <Header title='5G地区覆盖率'/>
-                <div id='area_conver_rate' style={{width: '100%', height: '100%', marginTop: '-35px'}}></div>
+                <BorderBox7 color={['#083a65']}>
+                  <Header title='5G地区覆盖率'/>
+                  <div id='area_conver_rate' style={{width: '100%', height: '100%', marginTop: '-35px'}}></div>
+                </BorderBox7>
               </section>
             </ReactWOW>
           </div>

@@ -11,6 +11,9 @@
   font-size: 18px;
   /*background-color: #000;*/
 }
+.dv-border-box-7 .border-box-content{
+  padding: 10px;
+}
 
 .wow {
   visibility: visible !important;
@@ -38,18 +41,17 @@ section {
   /*background-color: #202B47;*/
   /*background-color: rgba(32, 43, 71,0.6);*/
   background-color: transparent;
-  padding: 10px;
   border-radius: 4px;
   overflow: hidden;
-  -webkit-transition: border linear .2s, -webkit-box-shadow linear .5s;
-  border-color: rgba(141, 39, 142, .75);
-  -webkit-box-shadow: 0 0 7px rgba(87, 147, 243, 1);
+  /*-webkit-transition: border linear .2s, -webkit-box-shadow linear .5s;*/
+  /*border-color: rgba(141, 39, 142, .75);*/
+  /*-webkit-box-shadow: 0 0 7px rgba(87, 147, 243, 1);*/
   /*!* 设置3d环境 *!*/
   /*transform-style:preserve-3d;*/
   /*!*animation: play 10s linear infinite;*!*/
   /*transform: rotateY(-60deg);*/
-  perspective: 800px;
-  transition: all 0.6s linear;
+  /*perspective: 800px;*/
+  /*transition: all 0.6s linear;*/
 }
 
 section:hover {

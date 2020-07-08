@@ -68,6 +68,7 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
+            esModule:false, // 设为false，否则图片编译为 [object Module]
             name: 'static/img/[name].[hash:8].[ext]',
             limit: 10240, // 超过10K打包为图片，反之打包为base64
           }

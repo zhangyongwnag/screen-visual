@@ -55,6 +55,7 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
+            esModule:false, // 设为false，否则图片编译为 [object Module]
             name: 'static/img/[name].[hash:8].[ext]'
           }
         }
