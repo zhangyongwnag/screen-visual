@@ -70,7 +70,6 @@
   "scripts": {
     "start": "webpack-dev-server --progress --color --config config/webpack.config.dev.js",
     "build": "webpack -p --progress --color --config config/webpack.config.prod.js",
-    "test": "node scripts/test.js --env=jsdom",
     "server": "node serve/index.js"
   },
   "jest": {
